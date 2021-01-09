@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "dealerduino": {
+      "hosting": {
+        "dealerduino-app": [
+          "dealerduino"
+        ]
+      }
+    }
+  }
+}
