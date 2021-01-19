@@ -5,9 +5,20 @@
     [numberOfPlayers]="numberOfPlayers$ | async "
     [isScanning]="scannedPlayers$ | async"
     [players]="players$ | async"></app-game-player-names>
-<app-game-round roundNumber="0" *ngIf="roundStarted$ | async"></app-game-round>
-<app-game-round roundNumber="1" *ngIf="dealtCard1$ | async"></app-game-round>
-<app-game-round roundNumber="2" *ngIf="dealtCard2$ | async"></app-game-round>
-<app-game-round roundNumber="3" *ngIf="dealtCard3$ | async"></app-game-round>
-<app-game-round roundNumber="4" *ngIf="dealtCard4$ | async"></app-game-round>
-<app-game-money-status *ngIf="roundFinished$ | async"></app-game-money-status>
+<app-game-round-starting *ngIf="roundStarting$ | async"></app-game-round-starting>
+<app-game-round  *ngIf="roundStarted$ | async" 
+    roundStageName="Pre-flop" 
+    [roundNumber]="roundNumber$ | async"
+    [nextShowCards]="3"></app-game-round>
+<app-game-round  *ngIf="dealtCard1$ | async" 
+    roundStageName="Flop" 
+    [roundNumber]="roundNumber$ | async"
+    [nextShowCards]="1"></app-game-round>
+<app-game-round  *ngIf="dealtCard2$ | async" 
+    roundStageName="Turn" 
+    [roundNumber]="roundNumber$ | async"
+    [nextShowCards]="1"></app-game-round>
+<app-game-money-status *ngIf="roundFinished$ | async"
+    [players]="players$ | async"></app-game-money-status>
+<app-game-end *ngIf="gameEnded$ | async"
+    [winnerName]="winnerName$ | async"></app-game-end>

@@ -1,4 +1,6 @@
 import { Component, Input } from "@angular/core";
+import { CommandType } from "src/app/model/Command";
+import { FirebaseService } from "src/app/services/firebase";
 
 @Component({
     selector: 'app-game-round',
@@ -6,7 +8,18 @@ import { Component, Input } from "@angular/core";
     styleUrls: ['./round.component.scss']
 })
 export class RoundComponent {
-
     @Input() roundNumber : number;
+    @Input() roundStageName : string;
+    @Input() nextShowCards: number;
+
+    constructor(private firebaseService: FirebaseService) {}
+
+    public openNextRound() {
+        this.firebaseService.sendCommand({
+            command: CommandType.SHOW_CARD,
+            arg1: this.nextShowCards,
+            arg2: 0,
+        })
+    }
 
 }

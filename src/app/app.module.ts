@@ -40,6 +40,8 @@ import { PlayerNamesComponent } from './pages/game/stages/player-names/player-na
 import { MoneyStatusComponent } from './pages/game/stages/money-status/money-status.component';
 import { GameEndComponent } from './pages/game/stages/game-end/game-end.component';
 import { ScanningComponent } from './pages/game/stages/scanninng/scanning.component';
+import { RoundStartingComponent } from './pages/game/stages/round-starting/round-starting.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import { ScanningComponent } from './pages/game/stages/scanninng/scanning.compon
     HomeComponent,
     ScanPlayersComponent,
     ScanningComponent,
+    RoundStartingComponent,
     RoundComponent,
     PlayerNamesComponent,
     MoneyStatusComponent,
@@ -58,6 +61,7 @@ import { ScanningComponent } from './pages/game/stages/scanninng/scanning.compon
   ],
   imports: [
     AppRouting,
+    FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),

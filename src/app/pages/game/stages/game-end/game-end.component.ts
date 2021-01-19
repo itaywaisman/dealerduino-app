@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 
 @Component({
     selector: 'app-game-end',
@@ -6,5 +6,5 @@ import { Component } from "@angular/core";
     styleUrls: ['./game-end.component.scss']
 })
 export class GameEndComponent {
-
+    @Input() public winnerName: string;
 }

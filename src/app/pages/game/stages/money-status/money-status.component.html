@@ -1,1 +1,12 @@
-<h1>Money Status</h1>
+
+
+<div class="stage-container">
+    <div class="centered-content">
+        <h1>{{randomTitle}}</h1>
+        <h4>Now let's see who got richer and who... well... didn't</h4>
+        <mat-form-field *ngFor="let player of players" color="accent">
+            <input matInput [placeholder]="player.name" [name]="player.name" [(ngModel)]="player.money">
+        </mat-form-field>
+        <button class="btn btn-success mr-1" (click)="nextRound()">Next round!</button>
+    </div>
+</div>

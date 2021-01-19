@@ -7,11 +7,21 @@ import { FirebaseService } from "src/app/services/firebase";
     templateUrl: './player-names.component.html',
     styleUrls: ['./player-names.component.scss']
 })
-export class PlayerNamesComponent {
+export class PlayerNamesComponent implements OnInit {
     
-
-    @Input() numberOfPlayers: number = 0;
-    @Input() players: [] = [];
+    public players:{name: string}[] = [];
+    private _numberOfPlayers: number = 0;
+    @Input() set numberOfPlayers(value : number) {
+        this.players = [...Array(value).keys()].map((idx) => {
+            return {
+                name: 'Player ' + idx
+            }
+        })
+        this._numberOfPlayers = value;
+    }
+    get numberOfPlayers() : number {
+        return this._numberOfPlayers;
+    }
 
 
     public isNumOfPlayersCorrect: boolean = false;
@@ -19,6 +29,16 @@ export class PlayerNamesComponent {
     constructor(private firebaseService: FirebaseService) {
         
     }
+    ngOnInit(): void {
+        this.players = [...Array(this.numberOfPlayers).keys()].map((idx) => {
+            return {
+                name: 'Player ' + idx
+            }
+        })
+        console.log(this.players)
+    }
+
+    
 
     public incorrectNumOfPlayers() {
         this.firebaseService.scanPlayers();
@@ -30,7 +50,8 @@ export class PlayerNamesComponent {
     }
 
     public startRound() {
-        this.firebaseService.savePlayerNames(this.players);
+        const finalPlayers = this.players.map( player => {return {...player, money: 100}})
+        this.firebaseService.savePlayers(finalPlayers);
 
         this.firebaseService.sendCommand({
             command: CommandType.START_ROUND,
