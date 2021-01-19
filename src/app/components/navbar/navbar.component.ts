@@ -10,6 +10,8 @@ export class Navbar {
 
     @Output() menuClick = new EventEmitter();
 
+    public isCollapsed = true;
+
     constructor(private state: StateService) {}
 
 }

@@ -13,47 +13,65 @@ import { FirebaseService } from "src/app/services/firebase";
 export class GameComponent {
 
     
-  public gameNotStarted$ : Observable<boolean>;
-  public gameStarted$ : Observable<boolean>;
-  public roundStarted$ : Observable<boolean>;
-  public dealtCard1Started$ : Observable<boolean>;
-  public dealtCard2Started$ : Observable<boolean>;
-  public dealtCard3Started$ : Observable<boolean>;
-  public dealtCard4Started$ : Observable<boolean>;
-  public roundFinished$ : Observable<boolean>;
-  public error$ : Observable<boolean>;
+    public gameNotStarted$ : Observable<boolean>;
+    public gameStarted$ : Observable<boolean>;
+    public scannedPlayers$ : Observable<boolean>;
+    public roundStarted$ : Observable<boolean>;
+    public dealtCard1$ : Observable<boolean>;
+    public dealtCard2$ : Observable<boolean>;
+    public dealtCard3$ : Observable<boolean>;
+    public dealtCard4$ : Observable<boolean>;
+    public roundFinished$ : Observable<boolean>;
 
-  constructor(private firebaseService: FirebaseService) {
-    this.gameNotStarted$ = firebaseService.gameStage$.pipe(
-        map(stage => stage == GameStage.NOT_STARTED)
-    );
+    public numberOfPlayers$ : Observable<number>;
+    public players$ : Observable<{ name: string }[]>;
+    public isScanning$ : Observable<boolean>;
 
-    this.gameStarted$ = firebaseService.gameStage$.pipe(
-        map(stage => stage == GameStage.STARTED)
-    );
+    constructor(private firebaseService: FirebaseService) {
+        this.gameNotStarted$ = this.firebaseService.gameStage$.pipe(
+            map(stage => stage == GameStage.NOT_STARTED)
+        );
 
-    this.roundStarted$ = firebaseService.gameStage$.pipe(
-        map(stage => stage == GameStage.ROUND_STARTED)
-    );
+        this.gameStarted$ = this.firebaseService.gameStage$.pipe(
+            map(stage => stage == GameStage.STARTED)
+        );
 
-    this.dealtCard1Started$ = firebaseService.gameStage$.pipe(
-        map(stage => stage == GameStage.DEALT_CARD_1)
-    );
+        this.isScanning$ = this.firebaseService.gameStage$.pipe(
+            map(stage => stage == GameStage.SCANNING_PLAYERS)
+        )
+        
+        this.scannedPlayers$ = this.firebaseService.gameStage$.pipe(
+            map(stage => stage == GameStage.SCANNED_PLAYERS)
+        )
 
-    this.dealtCard2Started$ = firebaseService.gameStage$.pipe(
-        map(stage => stage == GameStage.DEALT_CARD_2)
-    );
-    this.dealtCard3Started$ = firebaseService.gameStage$.pipe(
-        map(stage => stage == GameStage.DEALT_CARD_3)
-    );
-    this.dealtCard4Started$ = firebaseService.gameStage$.pipe(
-        map(stage => stage == GameStage.DEALT_CARD_4)
-    );
-    this.roundFinished$ = firebaseService.gameStage$.pipe(
-        map(stage => stage == GameStage.ROUND_FINISHED)
-    );
-    this.error$ = firebaseService.gameStage$.pipe(
-        map(stage => stage == GameStage.ERROR)
-    );
-  }
+        this.roundStarted$ = this.firebaseService.gameStage$.pipe(
+            map(stage => stage == GameStage.ROUND_STARTED)
+        );
+
+        this.dealtCard1$ = this.firebaseService.gameStage$.pipe(
+            map(stage => stage == GameStage.DEALT_CARD_1)
+        );
+
+        this.dealtCard2$ = this.firebaseService.gameStage$.pipe(
+            map(stage => stage == GameStage.DEALT_CARD_2)
+        );
+        this.dealtCard3$ = this.firebaseService.gameStage$.pipe(
+            map(stage => stage == GameStage.DEALT_CARD_3)
+        );
+        this.dealtCard4$ = this.firebaseService.gameStage$.pipe(
+            map(stage => stage == GameStage.DEALT_CARD_4)
+        );
+        this.roundFinished$ = this.firebaseService.gameStage$.pipe(
+            map(stage => stage == GameStage.ROUND_FINISHED)
+        );
+
+        this.numberOfPlayers$ = this.firebaseService.numOfPlayers$;
+        this.players$ = this.firebaseService.numOfPlayers$.pipe(
+            map((numOfPlayers) => {
+                return [...Array(numOfPlayers).keys()].map((idx) => {
+                    return { name : 'player' +idx}
+                })
+            })
+        )
+    }
 }

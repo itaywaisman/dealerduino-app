@@ -1,0 +1,28 @@
+<div class="stage-container">
+    <div class="centered" *ngIf="isScanning">
+        <div class="centered-content">
+            <mat-spinner  class="align-items-center" [color]="'accent'"></mat-spinner>
+            <h1>Scanning Players</h1>
+        </div> 
+    </div>
+    <div class="centered" *ngIf="!isScanning">
+        
+        <div class="centered-content" *ngIf="!isNumOfPlayersCorrect">
+            <p>I found {{numberOfPlayers}} players. </p>
+            <button class="btn btn-success mr-1" (click)="correctNumOfPlayers()">That's Correct</button>
+            <button class="btn btn-warning mr-1" (click)="incorrectNumOfPlayers()">Scan Again</button>
+        </div>
+        
+        <div class="centered-content" *ngIf="isNumOfPlayersCorrect">
+            <h1>Amazing, what are your names?</h1>
+        
+            <mat-form-field *ngFor="let player of players" color="accent">
+                <input matInput [placeholder]="player.name" [(value)]="player.name">
+            </mat-form-field>
+
+            <button class="btn btn-success mr-1" (click)="deal()">Deal us!</button>
+        </div>
+        
+    </div>
+
+</div>

@@ -1,12 +1,19 @@
 
-<mat-drawer-container class="app-container" autosize>
-    <mat-drawer #drawer class="app-sidenav" mode="side">
-        <app-sidebar></app-sidebar>
-    </mat-drawer>
+
     
-<app-navbar (menuClick)="drawer.toggle()"></app-navbar>
+<app-navbar></app-navbar>
 
-    <router-outlet></router-outlet>
-
-</mat-drawer-container>
-
+<div class="wrapper">
+    <div class="page-header header-filter">
+      <div class="squares square1"></div>
+      <div class="squares square2"></div>
+      <div class="squares square3"></div>
+      <div class="squares square4"></div>
+      <div class="squares square5"></div>
+      <div class="squares square6"></div>
+      <div class="squares square7"></div>
+      <div class="container">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>

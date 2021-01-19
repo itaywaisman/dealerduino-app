@@ -8,17 +8,10 @@
     display: flex;
 }
 
-.app-container {
-    flex: 1;
-}
+.wrapper {
+    width: 100vw;
 
-.app-sidenav-content {
-    display: flex;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-}
-
-.app-sidenav {
-    padding: 20px;
+    .container{
+        top: 200px;
+    }
 }

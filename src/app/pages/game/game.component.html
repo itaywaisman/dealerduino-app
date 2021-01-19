@@ -1,1 +1,12 @@
-<h1>Game</h1>
+<app-game-home *ngIf="gameNotStarted$ | async"></app-game-home>
+<app-game-scan-players *ngIf="gameStarted$ | async"></app-game-scan-players>
+<app-game-player-names *ngIf="isScanning$ | async"
+    [numberOfPlayers]="numberOfPlayers$ | async "
+    [isScanning]="scannedPlayers$ | async"
+    [players]="players$ | async"></app-game-player-names>
+<app-game-round roundNumber="0" *ngIf="roundStarted$ | async"></app-game-round>
+<app-game-round roundNumber="1" *ngIf="dealtCard1$ | async"></app-game-round>
+<app-game-round roundNumber="2" *ngIf="dealtCard2$ | async"></app-game-round>
+<app-game-round roundNumber="3" *ngIf="dealtCard3$ | async"></app-game-round>
+<app-game-round roundNumber="4" *ngIf="dealtCard4$ | async"></app-game-round>
+<app-game-money-status *ngIf="roundFinished$ | async"></app-game-money-status>
