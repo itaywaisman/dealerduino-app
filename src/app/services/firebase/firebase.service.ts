@@ -19,6 +19,11 @@ export class FirebaseService {
         this.isScanning$ = this.db.object<boolean>('state/is_scanning').valueChanges();
     }
 
+    public savePlayerNames(players: {name: string}[]) {
+        let playersRef = this.db.object<{name: string}[]>('state/players');
+        playersRef.set(players);
+    }
+
     public sendCommand(command: Command) {
         let cmdRef = this.db.object<Command>('cmd');
         cmdRef.set(command);

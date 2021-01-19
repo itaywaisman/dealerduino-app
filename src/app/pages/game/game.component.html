@@ -1,6 +1,7 @@
 <app-game-home *ngIf="gameNotStarted$ | async"></app-game-home>
 <app-game-scan-players *ngIf="gameStarted$ | async"></app-game-scan-players>
-<app-game-player-names *ngIf="isScanning$ | async"
+<app-game-scanning *ngIf="isScanning$ | async"></app-game-scanning>
+<app-game-player-names *ngIf="scannedPlayers$ | async"
     [numberOfPlayers]="numberOfPlayers$ | async "
     [isScanning]="scannedPlayers$ | async"
     [players]="players$ | async"></app-game-player-names>

@@ -39,12 +39,14 @@ import { RoundComponent } from './pages/game/stages/round/round.component';
 import { PlayerNamesComponent } from './pages/game/stages/player-names/player-names.component';
 import { MoneyStatusComponent } from './pages/game/stages/money-status/money-status.component';
 import { GameEndComponent } from './pages/game/stages/game-end/game-end.component';
+import { ScanningComponent } from './pages/game/stages/scanninng/scanning.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ScanPlayersComponent,
+    ScanningComponent,
     RoundComponent,
     PlayerNamesComponent,
     MoneyStatusComponent,

@@ -11,7 +11,6 @@ export class PlayerNamesComponent {
     
 
     @Input() numberOfPlayers: number = 0;
-    @Input() isScanning: boolean = true;
     @Input() players: [] = [];
 
 
@@ -31,6 +30,8 @@ export class PlayerNamesComponent {
     }
 
     public startRound() {
+        this.firebaseService.savePlayerNames(this.players);
+
         this.firebaseService.sendCommand({
             command: CommandType.START_ROUND,
             arg1: 0,

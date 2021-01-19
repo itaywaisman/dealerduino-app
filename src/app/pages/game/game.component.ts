@@ -15,6 +15,7 @@ export class GameComponent {
     
     public gameNotStarted$ : Observable<boolean>;
     public gameStarted$ : Observable<boolean>;
+    public isScanning$ : Observable<boolean>;
     public scannedPlayers$ : Observable<boolean>;
     public roundStarted$ : Observable<boolean>;
     public dealtCard1$ : Observable<boolean>;
@@ -25,7 +26,7 @@ export class GameComponent {
 
     public numberOfPlayers$ : Observable<number>;
     public players$ : Observable<{ name: string }[]>;
-    public isScanning$ : Observable<boolean>;
+    
 
     constructor(private firebaseService: FirebaseService) {
         this.gameNotStarted$ = this.firebaseService.gameStage$.pipe(
@@ -69,7 +70,7 @@ export class GameComponent {
         this.players$ = this.firebaseService.numOfPlayers$.pipe(
             map((numOfPlayers) => {
                 return [...Array(numOfPlayers).keys()].map((idx) => {
-                    return { name : 'player' +idx}
+                    return { name : 'Player ' + (idx+1)}
                 })
             })
         )
