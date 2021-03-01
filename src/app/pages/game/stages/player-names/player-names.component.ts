@@ -54,7 +54,7 @@ export class PlayerNamesComponent implements OnInit {
         this.firebaseService.savePlayers(finalPlayers);
 
         this.firebaseService.sendCommand({
-            command: CommandType.START_ROUND,
+            command: CommandType.COMMAND_START_ROUND,
             arg1: 0,
             arg2: 0
         })

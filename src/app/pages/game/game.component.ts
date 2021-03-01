@@ -68,9 +68,6 @@ export class GameComponent {
         this.dealtCard3$ = this.firebaseService.gameStage$.pipe(
             map(stage => stage == GameStage.DEALT_CARD_3)
         );
-        this.dealtCard4$ = this.firebaseService.gameStage$.pipe(
-            map(stage => stage == GameStage.DEALT_CARD_4)
-        );
         this.roundFinished$ = this.firebaseService.gameStage$.pipe(
             map(stage => stage == GameStage.ROUND_FINISHED)
         );

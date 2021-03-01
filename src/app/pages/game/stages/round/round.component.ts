@@ -16,7 +16,7 @@ export class RoundComponent {
 
     public openNextRound() {
         this.firebaseService.sendCommand({
-            command: CommandType.SHOW_CARD,
+            command: CommandType.COMMAND_SHOW_CARD_1,
             arg1: this.nextShowCards,
             arg2: 0,
         })

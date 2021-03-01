@@ -65,7 +65,6 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,

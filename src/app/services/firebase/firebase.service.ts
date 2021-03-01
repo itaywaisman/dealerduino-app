@@ -39,7 +39,7 @@ export class FirebaseService {
         this.setRoundNumber(1);
         this.setCardsRevealed(0);
         this.sendCommand({
-            command: CommandType.START_ROUND,
+            command: CommandType.COMMAND_START_ROUND,
             arg1: 0,
             arg2: 0
         })
@@ -47,7 +47,7 @@ export class FirebaseService {
 
     public scanPlayers() {
         this.sendCommand({
-            command: CommandType.SCAN_PLAYERS,
+            command: CommandType.COMMAND_SCAN_PLAYERS,
             arg1: 0,
             arg2: 0
         })
@@ -92,7 +92,7 @@ export class FirebaseService {
         let gameStateRef = this.db.object<number>('state/game_state');
         gameStateRef.set(GameStage.GAME_ENDED);
         this.sendCommand({
-            command: CommandType.RESET,
+            command: CommandType.COMMAND_RESET,
             arg1: 0,
             arg2: 0
         })

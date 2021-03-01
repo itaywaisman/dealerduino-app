@@ -13,7 +13,7 @@ export class HomeComponent {
 
     public startGame() {
         this.firebaseService.sendCommand({
-            command: CommandType.START_GAME,
+            command: CommandType.COMMAND_START_GAME,
             arg1: 0,
             arg2: 0
         });
