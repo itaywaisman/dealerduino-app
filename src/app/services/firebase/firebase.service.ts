@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 import * as _ from 'lodash';
 
 import { Command, CommandType } from "src/app/model/Command";
-import { GameStage, GameState } from "src/app/model/GameState";
+import { GameStage, GameState, MachineState } from "src/app/model/GameState";
 import { Player } from "src/app/model/Player";
 import { map } from "rxjs/operators";
 
@@ -121,6 +121,8 @@ export class FirebaseService {
     public reset() {
         let gameStateRef = this.db.object<number>('state/game_state');
         gameStateRef.set(GameStage.GAME_STATE_NOT_STARTED);
+        let machineStateRef = this.db.object<number>('state/machine_state');
+        machineStateRef.set(MachineState.MACHINE_STATE_IDLE);
         let numOfPlayersRef = this.db.object<number>('state/num_of_players');
         numOfPlayersRef.set(0);
         let roundRef = this.db.object<number>('state/roundNumber');
