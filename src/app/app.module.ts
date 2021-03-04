@@ -44,6 +44,7 @@ import { RoundStartingComponent } from './pages/game/stages/round-starting/round
 import { FormsModule } from '@angular/forms';
 import { DealingCardComponent } from './pages/game/stages/dealing-card/dealing-card.component.';
 import { AudioService } from './services/audio';
+import { DebugComponent } from './pages/debug/debug.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { AudioService } from './services/audio';
     GameEndComponent,
     GameComponent,
     StatsComponent,
+    DebugComponent,
     Navbar,
     Sidebar
   ],

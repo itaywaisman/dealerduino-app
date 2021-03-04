@@ -1,0 +1,17 @@
+<div>
+    <h2>Scan:</h2>
+    <button class="btn btn-success mr-1" (click)="scan()">Scan</button>
+
+    <h2>Deal Card:</h2>
+    <p>Is Open: <input type="checkbox" [(ngModel)]="isopen" /> </p>
+    <p>
+        <button class="btn btn-success mr-1" (click)="dealCard(1)">Deal Player 1</button>
+        <button class="btn btn-success mr-1" (click)="dealCard(2)">Deal Player 2</button>
+        <button class="btn btn-success mr-1" (click)="dealCard(3)">Deal Player 3</button>
+        <button class="btn btn-success mr-1" (click)="dealCard(4)">Deal Player 4</button>
+    </p>
+
+
+    <h2>Celebrate:</h2>
+    <button class="btn btn-success mr-1" (click)="celebrate()">Celebrate</button>
+</div>
