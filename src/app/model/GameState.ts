@@ -1,21 +1,26 @@
 export interface GameState {
+    machine_state: MachineState,
     game_state: GameStage,
     player_num: number
 }
 
 export enum GameStage {
-    NOT_STARTED             = 0x000,
-    STARTED                 = 0x001,
-    SCANNING_PLAYERS        = 0x002,
-    SCANNED_PLAYERS         = 0x003,
-    ROUND_STARTING          = 0x004,
-    ROUND_STARTED           = 0x010,
-    DEALING_CARD_1          = 0x011,
-    DEALT_CARD_1            = 0x012,
-    DEALING_CARD_2          = 0x021,
-    DEALT_CARD_2            = 0x022,
-    DEALING_CARD_3          = 0x031,
-    DEALT_CARD_3            = 0x032,
-    ROUND_FINISHED          = 0x019,
-    GAME_ENDED              = 0x100
+    GAME_STATE_NOT_STARTED =             0,
+    GAME_STATE_STARTED =                 1,
+    GAME_STATE_SCANNED_PLAYERS =         3,
+    GAME_STATE_ROUND_STARTED =           10,
+    GAME_STATE_DEALT_CARD_1 =            12,
+    GAME_STATE_DEALT_CARD_2 =            22,
+    GAME_STATE_DEALT_CARD_3 =            32,
+    GAME_STATE_ROUND_FINISHED =          40,
+    GAME_STATE_GAME_ENDED =              100,
+}
+export enum MachineState {
+    MACHINE_STATE_IDLE =                    0,
+    MACHINE_STATE_RESETING =                1,
+    MACHINE_STATE_SCANNING_PLAYERS =        2,
+    MACHINE_STATE_ROUND_STARTING =          4,
+    MACHINE_STATE_DEALING_CARD_1 =          11,
+    MACHINE_STATE_DEALING_CARD_2 =          21,
+    MACHINE_STATE_DEALING_CARD_3 =          31,
 }

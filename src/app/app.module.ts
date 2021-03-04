@@ -42,6 +42,8 @@ import { GameEndComponent } from './pages/game/stages/game-end/game-end.componen
 import { ScanningComponent } from './pages/game/stages/scanninng/scanning.component';
 import { RoundStartingComponent } from './pages/game/stages/round-starting/round-starting.component';
 import { FormsModule } from '@angular/forms';
+import { DealingCardComponent } from './pages/game/stages/dealing-card/dealing-card.component.';
+import { AudioService } from './services/audio';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,7 @@ import { FormsModule } from '@angular/forms';
     ScanningComponent,
     RoundStartingComponent,
     RoundComponent,
+    DealingCardComponent,
     PlayerNamesComponent,
     MoneyStatusComponent,
     GameEndComponent,
@@ -83,7 +86,7 @@ import { FormsModule } from '@angular/forms';
     CarouselModule.forRoot(),
     ModalModule.forRoot()
   ],
-  providers: [StateService, FirebaseService],
+  providers: [StateService, FirebaseService, AudioService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

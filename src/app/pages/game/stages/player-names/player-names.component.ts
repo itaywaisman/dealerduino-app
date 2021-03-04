@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
 import { CommandType } from "src/app/model/Command";
+import { AudioService } from "src/app/services/audio";
 import { FirebaseService } from "src/app/services/firebase";
 
 @Component({
@@ -26,7 +27,7 @@ export class PlayerNamesComponent implements OnInit {
 
     public isNumOfPlayersCorrect: boolean = false;
 
-    constructor(private firebaseService: FirebaseService) {
+    constructor(private firebaseService: FirebaseService, private audioService: AudioService) {
         
     }
     ngOnInit(): void {
@@ -41,6 +42,7 @@ export class PlayerNamesComponent implements OnInit {
     
 
     public incorrectNumOfPlayers() {
+        this.audioService.playAudio();
         this.firebaseService.scanPlayers();
         this.isNumOfPlayersCorrect = false;
     }
@@ -50,6 +52,7 @@ export class PlayerNamesComponent implements OnInit {
     }
 
     public startRound() {
+        this.audioService.playAudio();
         const finalPlayers = this.players.map( player => {return {...player, money: 100}})
         this.firebaseService.savePlayers(finalPlayers);
 

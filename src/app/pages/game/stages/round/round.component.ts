@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { CommandType } from "src/app/model/Command";
+import { AudioService } from "src/app/services/audio";
 import { FirebaseService } from "src/app/services/firebase";
 
 @Component({
@@ -10,16 +11,21 @@ import { FirebaseService } from "src/app/services/firebase";
 export class RoundComponent {
     @Input() roundNumber : number;
     @Input() roundStageName : string;
-    @Input() nextShowCards: number;
+    @Input() nextCommand: number;
 
-    constructor(private firebaseService: FirebaseService) {}
+    constructor(private firebaseService: FirebaseService, private audioService: AudioService) {}
 
-    public openNextRound() {
+    public openNextCard() {
+        this.audioService.playAudio();
         this.firebaseService.sendCommand({
-            command: CommandType.COMMAND_SHOW_CARD_1,
-            arg1: this.nextShowCards,
+            command: this.nextCommand,
+            arg1: 0,
             arg2: 0,
         })
+    }
+
+    public endRound() {
+        this.firebaseService.endRound();
     }
 
 }

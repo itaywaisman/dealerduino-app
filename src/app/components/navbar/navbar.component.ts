@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter } from "@angular/core";
+import { FirebaseService } from "src/app/services/firebase";
 import { StateService } from "src/app/services/state";
 
 @Component({
@@ -12,6 +13,9 @@ export class Navbar {
 
     public isCollapsed = true;
 
-    constructor(private state: StateService) {}
+    constructor(private firebaseService: FirebaseService) {}
 
+    public resetGame() {
+        this.firebaseService.reset();
+    }
 }

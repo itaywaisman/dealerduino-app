@@ -9,15 +9,27 @@
 <app-game-round  *ngIf="roundStarted$ | async" 
     roundStageName="Pre-flop" 
     [roundNumber]="roundNumber$ | async"
-    [nextShowCards]="3"></app-game-round>
+    [nextCommand]="4"></app-game-round>
+<app-game-dealing-card *ngIf="dealingCard1$ | async"
+    title="Showing flop"></app-game-dealing-card>
 <app-game-round  *ngIf="dealtCard1$ | async" 
     roundStageName="Flop" 
     [roundNumber]="roundNumber$ | async"
-    [nextShowCards]="1"></app-game-round>
+    [nextCommand]="5"></app-game-round>
+
+<app-game-dealing-card *ngIf="dealingCard2$ | async"
+    title="Showing turn"></app-game-dealing-card>
 <app-game-round  *ngIf="dealtCard2$ | async" 
     roundStageName="Turn" 
     [roundNumber]="roundNumber$ | async"
-    [nextShowCards]="1"></app-game-round>
+    [nextCommand]="6"></app-game-round>
+
+<app-game-dealing-card *ngIf="dealingCard3$ | async"
+    title="Showing river"></app-game-dealing-card>
+<app-game-round  *ngIf="dealtCard3$ | async" 
+    roundStageName="River" 
+    [roundNumber]="roundNumber$ | async"
+    [nextCommand]="10"></app-game-round>
 <app-game-money-status *ngIf="roundFinished$ | async"
     [players]="players$ | async"></app-game-money-status>
 <app-game-end *ngIf="gameEnded$ | async"

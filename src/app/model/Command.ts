@@ -12,6 +12,7 @@ export enum CommandType {
     COMMAND_SHOW_CARD_1     = 4,
     COMMAND_SHOW_CARD_2     = 5,
     COMMAND_SHOW_CARD_3     = 6,
+    COMMAND_ROUND_ENDED     = 10,
     COMMAND_PLAYER_QUIT     = 998,
     COMMAND_RESET           = 999,
 }

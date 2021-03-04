@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { Player } from "src/app/model/Player";
+import { AudioService } from "src/app/services/audio";
 import { FirebaseService } from "src/app/services/firebase";
 
 @Component({
@@ -13,7 +14,7 @@ export class MoneyStatusComponent {
 
     @Input() public players : Player[];
 
-    constructor(private firebaseService: FirebaseService) {
+    constructor(private firebaseService: FirebaseService, private audioService: AudioService) {
 
         const randomTitles = [
             "WOW!!!!",
@@ -29,6 +30,7 @@ export class MoneyStatusComponent {
 
 
     public nextRound() {
+        this.audioService.playAudio();
         this.firebaseService.savePlayers(this.players)
         this.firebaseService.nextRound();
     }

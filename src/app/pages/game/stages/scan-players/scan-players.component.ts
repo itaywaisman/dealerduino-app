@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { CommandType } from "src/app/model/Command";
+import { AudioService } from "src/app/services/audio";
 import { FirebaseService } from "src/app/services/firebase";
 
 @Component({
@@ -9,9 +10,10 @@ import { FirebaseService } from "src/app/services/firebase";
 })
 export class ScanPlayersComponent {
     
-    constructor(private firebase: FirebaseService) {}
+    constructor(private firebase: FirebaseService, private audioService: AudioService) {}
 
     public scanPlayers() {
+        this.audioService.playAudio();
         this.firebase.scanPlayers();
     }
 }

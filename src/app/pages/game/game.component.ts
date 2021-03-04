@@ -1,10 +1,11 @@
 import { Component } from "@angular/core";
 import { Observable } from "rxjs";
 import { map, max } from "rxjs/operators";
-import { GameStage } from "src/app/model/GameState";
+import { GameStage, MachineState } from "src/app/model/GameState";
 import { Player } from "src/app/model/Player";
 import { FirebaseService } from "src/app/services/firebase";
 import * as _ from 'lodash';
+import { state } from "@angular/animations";
 
 @Component({
     selector: 'app-game',
@@ -20,10 +21,16 @@ export class GameComponent {
     public scannedPlayers$ : Observable<boolean>;
     public roundStarting$ : Observable<boolean>;
     public roundStarted$ : Observable<boolean>;
+    
+    public dealingCard1$ : Observable<boolean>;
     public dealtCard1$ : Observable<boolean>;
+    
+    public dealingCard2$ : Observable<boolean>;
     public dealtCard2$ : Observable<boolean>;
+
+    public dealingCard3$ : Observable<boolean>;
     public dealtCard3$ : Observable<boolean>;
-    public dealtCard4$ : Observable<boolean>;
+    
     public roundFinished$ : Observable<boolean>;
     public gameEnded$ : Observable<boolean>;
 
@@ -34,45 +41,59 @@ export class GameComponent {
     public winnerName$ : Observable<string>;
 
     constructor(private firebaseService: FirebaseService) {
-        this.gameNotStarted$ = this.firebaseService.gameStage$.pipe(
-            map(stage => stage == GameStage.NOT_STARTED)
+        this.gameNotStarted$ = this.firebaseService.state$.pipe(
+            map(state => state.game_state == GameStage.GAME_STATE_NOT_STARTED && state.machine_state == MachineState.MACHINE_STATE_IDLE)
         );
 
-        this.gameStarted$ = this.firebaseService.gameStage$.pipe(
-            map(stage => stage == GameStage.STARTED)
+        this.gameStarted$ = this.firebaseService.state$.pipe(
+            map(state => state.game_state == GameStage.GAME_STATE_STARTED && state.machine_state == MachineState.MACHINE_STATE_IDLE)
         );
 
-        this.isScanning$ = this.firebaseService.gameStage$.pipe(
-            map(stage => stage == GameStage.SCANNING_PLAYERS)
-        )
+        this.isScanning$ = this.firebaseService.state$.pipe(
+            map(state => state.machine_state == MachineState.MACHINE_STATE_SCANNING_PLAYERS)
+        );
         
-        this.scannedPlayers$ = this.firebaseService.gameStage$.pipe(
-            map(stage => stage == GameStage.SCANNED_PLAYERS)
-        )
-
-        this.roundStarting$ = this.firebaseService.gameStage$.pipe(
-            map(stage => stage == GameStage.ROUND_STARTING)
+        this.scannedPlayers$ = this.firebaseService.state$.pipe(
+            map(state => state.game_state == GameStage.GAME_STATE_SCANNED_PLAYERS && state.machine_state == MachineState.MACHINE_STATE_IDLE)
         );
+        
 
-        this.roundStarted$ = this.firebaseService.gameStage$.pipe(
-            map(stage => stage == GameStage.ROUND_STARTED)
+        this.roundStarting$ = this.firebaseService.state$.pipe(
+            map(state => state.machine_state == MachineState.MACHINE_STATE_ROUND_STARTING)
         );
 
-        this.dealtCard1$ = this.firebaseService.gameStage$.pipe(
-            map(stage => stage == GameStage.DEALT_CARD_1)
+        this.roundStarted$ = this.firebaseService.state$.pipe(
+            map(state => state.game_state == GameStage.GAME_STATE_ROUND_STARTED && state.machine_state == MachineState.MACHINE_STATE_IDLE)
         );
 
-        this.dealtCard2$ = this.firebaseService.gameStage$.pipe(
-            map(stage => stage == GameStage.DEALT_CARD_2)
+
+        this.dealingCard1$ = this.firebaseService.state$.pipe(
+            map(state => state.machine_state == MachineState.MACHINE_STATE_DEALING_CARD_1)
         );
-        this.dealtCard3$ = this.firebaseService.gameStage$.pipe(
-            map(stage => stage == GameStage.DEALT_CARD_3)
+
+        this.dealtCard1$ = this.firebaseService.state$.pipe(
+            map(state => state.game_state == GameStage.GAME_STATE_DEALT_CARD_1 && state.machine_state == MachineState.MACHINE_STATE_IDLE)
         );
-        this.roundFinished$ = this.firebaseService.gameStage$.pipe(
-            map(stage => stage == GameStage.ROUND_FINISHED)
+
+        this.dealingCard2$ = this.firebaseService.state$.pipe(
+            map(state => state.machine_state == MachineState.MACHINE_STATE_DEALING_CARD_2)
         );
-        this.gameEnded$ = this.firebaseService.gameStage$.pipe(
-            map(stage => stage == GameStage.GAME_ENDED)
+        this.dealtCard2$ = this.firebaseService.state$.pipe(
+            map(state => state.game_state == GameStage.GAME_STATE_DEALT_CARD_2 && state.machine_state == MachineState.MACHINE_STATE_IDLE)
+        );
+
+        this.dealingCard3$ = this.firebaseService.state$.pipe(
+            map(state => state.machine_state == MachineState.MACHINE_STATE_DEALING_CARD_3)
+        );
+        this.dealtCard3$ = this.firebaseService.state$.pipe(
+            map(state => state.game_state == GameStage.GAME_STATE_DEALT_CARD_3 && state.machine_state == MachineState.MACHINE_STATE_IDLE)
+        );
+
+        this.roundFinished$ = this.firebaseService.state$.pipe(
+            map(state => state.game_state == GameStage.GAME_STATE_ROUND_FINISHED && state.machine_state == MachineState.MACHINE_STATE_IDLE)
+        );
+        this.gameEnded$  = this.firebaseService.state$.pipe(
+            map(state => state.game_state == GameStage.GAME_STATE_GAME_ENDED && state.machine_state == MachineState.MACHINE_STATE_IDLE)
         );
 
 

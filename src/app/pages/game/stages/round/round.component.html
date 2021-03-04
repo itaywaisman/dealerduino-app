@@ -6,7 +6,9 @@
         <h4>Round stage: {{roundStageName}}</h4>
 
         <br>
-
-        <button class="btn btn-success mr-1" (click)="openNextRound()">Open</button>
+        <div  *ngIf="nextCommand != 10">
+            <button class="btn btn-success mr-1" (click)="openNextCard()">Open</button>
+        </div>
+        <button class="btn btn-warning mr-1" (click)="endRound()">End Round</button>
     </div>
 </div>

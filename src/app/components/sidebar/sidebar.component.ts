@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { FirebaseService } from "src/app/services/firebase";
 
 @Component({
     selector: 'app-sidebar',
@@ -7,4 +8,9 @@ import { Component } from "@angular/core";
 })
 export class Sidebar {
 
+    constructor(private firebaseService: FirebaseService) {}
+
+    public resetGame() {
+        this.firebaseService.reset();
+    }
 }
